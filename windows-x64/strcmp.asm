@@ -2,6 +2,10 @@ strcmp:
 
     push rbp
     mov rbp, rsp
+
+    push rdi
+    push rsi
+
     sub rsp, 0x10
 
     mov rsi, rcx
@@ -16,8 +20,8 @@ strcmp_loop:
     mov al, [rsi+rdx]
     mov cl, [rdi+rdx]
 
-    mov [rbp-0x08], cl
-    or [rbp-0x08], al
+    mov [rbp-0x18], cl
+    or [rbp-0x18], al
     jz strcmp_end   ; They're equal if both bytes are null
 
     sub ax, cx
@@ -33,6 +37,11 @@ strcmp_sign_extend:
     cdqe        ; Sign extend eax => rax
 
 strcmp_end:
+
+    add rsp, 0x10
+
+    pop rsi
+    pop rdi
 
     leave
     ret

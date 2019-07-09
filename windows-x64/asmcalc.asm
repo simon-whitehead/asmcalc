@@ -8,7 +8,9 @@
 
 %include "io.asm"
 %include "memory.asm"
+%include "rpncalc.asm"
 %include "strcmp.asm"
+%include "tokenise.asm"
 %include "winapi.asm"
 
 global main
@@ -78,6 +80,12 @@ input_loop:
     call strcmp
     test rax, rax
     je test_command
+
+    ; let's try to parse the rest
+    mov rcx, input_buffer
+    call tokenise
+    mov rcx, rax
+    call calculate_rpn
 
 input_loop_end:
 

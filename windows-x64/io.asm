@@ -1,6 +1,7 @@
 
 ; read_line(char* rcx, int rdx)
 read_line:
+
     push rbp
     mov rbp, rsp
     sub rsp, 0x30
@@ -32,6 +33,7 @@ read_line:
 
 ; write_line(char* rcx, int rdx)
 write_line:
+
     push rbp
     mov rbp, rsp
     sub rsp, 0x30
