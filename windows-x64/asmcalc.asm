@@ -42,7 +42,7 @@ main:
 
     push rbp
     mov rbp, rsp
-    sub rsp,0x30
+    sub rsp, 0x30
 
     call input_loop ; main loop
 
@@ -54,29 +54,29 @@ input_loop:
     call zero_input_buffer
 
     ; display the input cursor 
-    mov rcx,cursor
-    mov rdx,cursor.len
+    mov rcx, cursor
+    mov rdx, cursor.len
     call write_line
 
     ; read the input
-    mov rcx,input_buffer
-    mov rdx,INPUT_BUFFER_SIZE
+    mov rcx, input_buffer
+    mov rdx, INPUT_BUFFER_SIZE
     call read_line
 
     ; switch (input_buffer)
 
     ; case "exit"
-    mov rcx,input_buffer
-    mov rdx,EXIT_COMMAND 
+    mov rcx, input_buffer
+    mov rdx, EXIT_COMMAND 
     call strcmp
-    test rax,rax
+    test rax, rax
     je end
 
     ; case "?test?"
-    mov rcx,input_buffer
-    mov rdx,TEST_COMMAND 
+    mov rcx, input_buffer
+    mov rdx, TEST_COMMAND 
     call strcmp
-    test rax,rax
+    test rax, rax
     je test_command
 
 input_loop_end:
@@ -84,15 +84,15 @@ input_loop_end:
     jmp input_loop
 
 end:
-    mov rcx,0x00
+    mov rcx, 0x00
     call ExitProcess
 
     ret
 
 ; test_command() - prints the test command
 test_command:
-    mov rcx,test_cmd
-    mov rdx,test_cmd.len-0x01
+    mov rcx, test_cmd
+    mov rdx, test_cmd.len-0x01
     call write_line
 
     jmp input_loop_end
@@ -100,10 +100,10 @@ test_command:
 zero_input_buffer:
 
     cld
-    mov rdi,input_buffer
-    mov rcx,INPUT_BUFFER_SIZE
+    mov rdi, input_buffer
+    mov rcx, INPUT_BUFFER_SIZE
 
-    xor rax,rax
+    xor rax, rax
     rep stosb
 
     ret
